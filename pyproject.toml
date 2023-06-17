@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "menubot"
+version = "0.1.0"
+description = "Menu bot for college (with pictures!)"
+authors = ["maskyy <62175286+maskyy@users.noreply.github.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = {extras = ["socks"], version = "^2.31.0"}
+beautifulsoup4 = "^4.12.2"
+python-telegram-bot = "^20.3"
+SQLAlchemy = "^2.0.16"
+alembic = "^1.11.1"
+
+[tool.poetry.group.dev.dependencies]
+gray = "^0.13.0"
+pytest = "^7.3.2"
+pre-commit = "^3.3.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
