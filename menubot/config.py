@@ -1,21 +1,23 @@
-# URL с разделом меню
-MENU_URL = "https://collegetsaritsyno.mskobr.ru/roditelyam/vse-voprosi-o-pitanii"
+# Default log level
+LOG_LEVEL = "INFO"
 
-# Текущий учебный год (2022 - 2022/2023). Для определения года, если его нет
+# URL containing menu pics
+COLLEGE_HOST = "https://collegetsaritsyno.mskobr.ru"
+MENU_PATH = "/roditelyam/vse-voprosi-o-pitanii"
+
+# Current year (2022 - 2022/2023), used if the year is not specified in the filename
 CURRENT_YEAR = 2022
 
-# Таймаут запросов в секундах
-TIMEOUT = 5
 
-# Ключ для Telegram-бота
+# Bot class
+# - menubot.bots.TelegramBot - Telegram
+# - menubot.bots.VkBot - VK
+BOT_CLASS = "menubot.bots.TelegramBot"
+
+# Bot token
 BOT_API_KEY = "secret"
 
-# Прокси
-PROXY_TYPE = "socks5"
-PROXY_IP = "localhost"
-PROXY_PORT = "8080"
-
-# sqlite
+# Database URI for sqlalchemy
 DATABASE_URI = "sqlite:///menubot.sqlite"
 
 try:

@@ -8,11 +8,11 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-requests = {extras = ["socks"], version = "^2.31.0"}
 beautifulsoup4 = "^4.12.2"
 python-telegram-bot = "^20.3"
 SQLAlchemy = "^2.0.16"
 alembic = "^1.11.1"
+aiohttp = "^3.8.5"
 
 [tool.poetry.group.dev.dependencies]
 gray = "^0.13.0"
