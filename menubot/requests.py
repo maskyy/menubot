@@ -15,7 +15,7 @@ log = logging.getLogger(__name__)
 async def get_name_and_link(li: Tag) -> tuple[str, str]:
     date = li.text.strip()
     a = list(li.children)[1]
-    return date, a["href"]
+    return date, a["href"]  # type: ignore
 
 
 async def get_menu_items(session: ClientSession) -> list[Tag]:
@@ -26,7 +26,7 @@ async def get_menu_items(session: ClientSession) -> list[Tag]:
     return soup.find_all("li", class_="jpeg")
 
 
-async def parse_and_query(session: ClientSession, elements: list[Tag]) -> None:
+async def parse_and_query(session: ClientSession, elements: list[Tag]) -> list[tuple]:
     tasks = [get_name_and_link(el) for el in elements]
     return await asyncio.gather(*tasks)
 

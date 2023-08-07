@@ -9,10 +9,14 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 beautifulsoup4 = "^4.12.2"
-python-telegram-bot = "^20.3"
 SQLAlchemy = "^2.0.16"
 alembic = "^1.11.1"
 aiohttp = "^3.8.5"
+aiosqlite = "^0.19.0"
+aiogram = "^2.25.1"
+vkbottle = "^4.3.12"
+pydantic = "<2.0.0"
+orjson = "^3.9.2"
 
 [tool.poetry.group.dev.dependencies]
 gray = "^0.13.0"

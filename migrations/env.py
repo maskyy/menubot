@@ -1,9 +1,12 @@
+import asyncio
 from logging.config import fileConfig
 
 from alembic import context
 from sqlalchemy import engine_from_config, pool
+from sqlalchemy.ext.asyncio import AsyncEngine
 
 from menubot.config import DATABASE_URI
+from migrations.models import Base
 
 
 # this is the Alembic Config object, which provides
@@ -20,7 +23,7 @@ if config.config_file_name is not None:
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 config.set_main_option("sqlalchemy.url", DATABASE_URI)
-target_metadata = None
+target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -59,19 +62,36 @@ def run_migrations_online() -> None:
     and associate a connection with the context.
 
     """
+
     connectable = engine_from_config(
         config.get_section(config.config_ini_section, {}),
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
+        future=True,
+    )
+    if connectable.dialect.is_async:
+        connectable = AsyncEngine(connectable)
+
+    if isinstance(connectable, AsyncEngine):
+        asyncio.run(run_async_migrations(connectable))
+    else:
+        with connectable.connect() as connection:
+            run_migrations(connection)
+
+
+def run_migrations(connection) -> None:
+    context.configure(
+        connection=connection, target_metadata=target_metadata,
     )
 
-    with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata,
-        )
+    with context.begin_transaction():
+        context.run_migrations()
 
-        with context.begin_transaction():
-            context.run_migrations()
+
+async def run_async_migrations(connectable) -> None:
+    async with connectable.connect() as connection:
+        await connection.run_sync(run_migrations)
+    await connectable.dispose()
 
 
 if context.is_offline_mode():
