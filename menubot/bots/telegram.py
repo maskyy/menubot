@@ -9,14 +9,22 @@ log = logging.getLogger(__name__)
 
 class TelegramBot(BaseBot):
     def __init__(self, token: str) -> None:
+        super().__init__()
         log.error("TODO")
 
         self._bot = Bot(token)
         self._dp = Dispatcher(self._bot)
 
-        @self._dp.message_handler(commands=["start", "hello"])
-        async def send_welcome(msg: types.Message):
-            await msg.reply("hello world")
+        for func, cmds in self._commands.items():
+            self._dp.register_message_handler(func, commands=cmds)
 
     def run(self):
         executor.start_polling(self._dp, skip_updates=True)
+
+    async def menu(self, msg: types.Message):
+        args = msg.get_args()
+        d = None
+        if args:
+            d = args.split(maxsplit=1)[0]
+            log.info(d)
+        await msg.answer(f"hello {d}")

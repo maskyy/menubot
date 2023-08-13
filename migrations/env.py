@@ -6,7 +6,7 @@ from sqlalchemy import engine_from_config, pool
 from sqlalchemy.ext.asyncio import AsyncEngine
 
 from menubot.config import DATABASE_URI
-from migrations.models import Base
+from menubot.models.models import Base
 
 
 # this is the Alembic Config object, which provides

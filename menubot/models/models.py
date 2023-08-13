@@ -2,6 +2,8 @@ from sqlalchemy import BLOB, Boolean, Column, Integer, Text
 from sqlalchemy.orm import declarative_base
 
 
+SETTINGS_ROWID = 1
+
 Base = declarative_base()
 
 class MenuImages(Base):
@@ -40,7 +42,7 @@ class Settings(Base):
     __tablename__ = "settings"
 
     # rowid should not be in the migrations
-    rowid = Column(Integer, primary_key=True)
+    rowid = Column(Integer, primary_key=True, default=SETTINGS_ROWID)
     first_date = Column(Text, nullable=False)
     days_count = Column(Integer, nullable=False)
     owner = Column(Integer, nullable=False)

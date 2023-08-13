@@ -1,15 +1,18 @@
-import datetime
-
-from .config import CURRENT_YEAR
+from datetime import datetime
 
 
+CURRENT_YEAR = 2022  # FIXME: use settings
 DATE_FORMATS = ["%d-%m", "%d-%m-%Y", "%d.%m"]
 
 
-def get_date(name: str) -> datetime.datetime:
+def today() -> datetime:
+    return datetime.utcnow()
+
+
+def get_date(name: str) -> datetime:
     for fmt in DATE_FORMATS:
         try:
-            date = datetime.datetime.strptime(name, fmt)
+            date = datetime.strptime(name, fmt)
             break
         except ValueError:
             pass
