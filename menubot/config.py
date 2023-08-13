@@ -14,7 +14,7 @@ BOT_CLASS = "menubot.bots.TelegramBot"
 BOT_API_KEY = "secret"
 
 # Database URI for sqlalchemy
-DATABASE_URI = "sqlite+aiosqlite:///menubot.sqlite"
+DATABASE_URI = "sqlite+pysqlite:///menubot.sqlite"
 
 try:
     from .local_config import *  # noqa

@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 
 from menubot.dates import get_date, today
+from menubot.services import SettingsService
 
 
 class BaseBot(ABC):
@@ -18,6 +19,8 @@ class BaseBot(ABC):
             self.settings: ["settings"],
             self.parse_menu_images: ["update_menu"],
         }
+
+        self._settings_service = SettingsService()
 
     @abstractmethod
     def run(self) -> None:
@@ -46,7 +49,7 @@ class BaseBot(ABC):
     async def list_dates(self, *args, **kwargs):
         pass
 
-    #@abstractmethod
+    @abstractmethod
     async def settings(self, *args, **kwargs):
         pass
 

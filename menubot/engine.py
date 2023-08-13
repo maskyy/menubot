@@ -1,6 +1,6 @@
-from sqlalchemy.ext.asyncio import create_async_engine
+from sqlalchemy import create_engine
 
 from .config import DATABASE_URI
 
 
-engine = create_async_engine(DATABASE_URI)
+engine = create_engine(DATABASE_URI)

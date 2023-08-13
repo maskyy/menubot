@@ -1,7 +1,7 @@
 from menubot import models
 from menubot.models import schemas
 
-from . import SQLAlchemyRepository
+from .sqlalchemy import SQLAlchemyRepository
 
 
 class AdminRepository(SQLAlchemyRepository):

@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime
 
 from orjson import dumps, loads
 from pydantic import BaseModel, HttpUrl
@@ -40,6 +40,6 @@ class Admin(CustomBaseModel):
 
 
 class Settings(CustomBaseModel):
-    first_date: str | None
+    first_date: date | None
     days_count: int | None
     owner: int | None
